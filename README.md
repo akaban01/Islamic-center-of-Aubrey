@@ -50,11 +50,17 @@ Jumu'ah timings are hard-coded because they are fixed and published:
 ## Deploying
 
 `.github/workflows/pages.yml` builds and deploys on every push. It needs Pages
-turned on once:
+turned on once, by hand:
 
 **Settings → Pages → Build and deployment → Source: _GitHub Actions_**
 
 Then re-run the workflow (Actions → Deploy to GitHub Pages → Run workflow).
+
+The workflow passes `enablement: true` to `actions/configure-pages`, which
+would normally turn Pages on by itself — but the workflow's `GITHUB_TOKEN`
+is not allowed to create a Pages site ("Resource not accessible by
+integration"), so the first switch has to be flipped by a repository admin.
+After that the setting sticks and every push deploys automatically.
 
 If you later point a custom domain at the site, add a `CNAME` file containing
 the domain and update `SITE` references in `sitemap.xml`, `robots.txt`, and the
