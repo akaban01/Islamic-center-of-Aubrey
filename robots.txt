@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://akaban01.github.io/Islamic-center-of-Aubrey/sitemap.xml
