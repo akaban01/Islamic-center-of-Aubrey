@@ -224,9 +224,15 @@ section.tight { padding-block: clamp(2.25rem, 4.5vw, 3.5rem); }
 
 .site-header {
   position: sticky; top: 0; z-index: 100;
+  border-bottom: 1px solid var(--line);
+}
+/* The translucent blur lives on a pseudo-element, not on .site-header itself:
+   backdrop-filter makes an element the containing block for fixed-position
+   descendants, which would clip the mobile nav drawer to the header's height. */
+.site-header::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
   background: color-mix(in srgb, var(--bg) 88%, transparent);
   backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--line);
 }
 .site-header .wrap {
   display: flex; align-items: center; justify-content: space-between;
@@ -269,7 +275,10 @@ section.tight { padding-block: clamp(2.25rem, 4.5vw, 3.5rem); }
     position: fixed; inset: 0 0 0 auto; width: min(330px, 84vw);
     background: var(--surface); border-left: 1px solid var(--line);
     flex-direction: column; align-items: stretch; gap: .2rem;
-    padding: 5.5rem 1.25rem 2rem;
+    /* --nav-top is set from the live header height when the drawer opens, so
+       the first link never tucks under the sticky header (the topbar above it
+       is only present at the top of the page). */
+    padding: var(--nav-top, 5.5rem) 1.25rem 2rem;
     transform: translateX(100%); transition: transform .28s cubic-bezier(.4,0,.2,1);
     box-shadow: var(--shadow-lg); overflow-y: auto;
   }

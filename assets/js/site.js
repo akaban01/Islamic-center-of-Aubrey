@@ -37,6 +37,13 @@
 
   function setNav(open) {
     if (!nav) return;
+    if (open) {
+      var header = document.querySelector(".site-header");
+      // The drawer is fixed to the viewport, so its top padding has to clear
+      // whatever the header currently occupies (taller at the top of the page,
+      // where the topbar is still in flow).
+      if (header) nav.style.setProperty("--nav-top", (header.getBoundingClientRect().bottom + 14) + "px");
+    }
     nav.setAttribute("data-open", String(open));
     if (backdrop) backdrop.setAttribute("data-open", String(open));
     if (navToggle) navToggle.setAttribute("aria-expanded", String(open));
