@@ -533,7 +533,14 @@ a.card:hover .card-link { gap: .65rem; }
   border: 1px solid var(--line);
 }
 .person h3 { font-size: 1.02rem; margin-bottom: .18rem; }
-.person span { font-size: .8rem; color: var(--ink-3); letter-spacing: .05em; }
+.person span { display: block; font-size: .8rem; color: var(--ink-3); letter-spacing: .05em; }
+.person-mail {
+  display: inline-block; margin-top: .6rem;
+  font-size: .78rem; color: var(--accent); text-decoration: none;
+  overflow-wrap: anywhere;
+  border-bottom: 1px solid transparent; transition: border-color .16s ease;
+}
+.person-mail:hover { border-bottom-color: currentColor; }
 
 /* ---------- Callout / notice ---------- */
 
